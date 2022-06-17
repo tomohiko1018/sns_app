@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 #
 # 
-default: &default
+development:
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -15,5 +15,12 @@ default: &default
   host: localhost
   database: sns_app
 
-development:
-  <<: *default
+production:
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  socket: /var/lib/mysql/mysql.sock
+  username: sns_app
+  host: sns-app.cs7aojmjpnkl.ap-northeast-1.rds.amazonaws.com
+  database: sns_app
+  password: <%= ENV['RAILS_APP_DATABASE_PASSWORD'] %
